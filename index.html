@@ -2,14 +2,14 @@
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Meishe's Garden Book</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=Pinyon+Script&display=swap">
-<link rel="manifest" href="manifest.webmanifest"><link rel="icon" type="image/png" href="icon-192.png"><link rel="apple-touch-icon" href="icon-180.png"><meta name="theme-color" content="#f1f1ec"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Garden Book">
+<link rel="manifest" href="manifest.webmanifest"><link rel="icon" type="image/png" href="icon-192.png"><link rel="apple-touch-icon" href="icon-180.png"><meta name="theme-color" content="#f1f1ec"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Garden Book">
 <style>
 :root{padding-top:env(safe-area-inset-top,0px);--bg:#f1f1ec;--card:rgba(255,255,255,.8);--ink:#292728;--mu:#6c6b58;--ln:#d0c7b3;--rose:#43442b;--rose2:#e6e1d2;--sage:#939474;--sage2:#e4e4d8;--gold:#d0c7b3;--bad:#9a5b4a}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.45 Jost,"Helvetica Neue",Arial,sans-serif}
-#bg{position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:520px;height:340px;z-index:0;pointer-events:none;background:center 30%/cover no-repeat;-webkit-mask-image:linear-gradient(#000 0,#000 55%,transparent 100%);mask-image:linear-gradient(#000 0,#000 55%,transparent 100%)}
+#bg{position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:520px;z-index:0;pointer-events:none;background:center top/100% 100% no-repeat;-webkit-mask-image:linear-gradient(#000 0,#000 62%,transparent 100%);mask-image:linear-gradient(#000 0,#000 62%,transparent 100%)}
 main{position:relative;z-index:1;max-width:520px;margin:0 auto;padding:0 16px 110px}
-.hero{height:250px;display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:8px;text-shadow:0 0 16px var(--bg),0 0 5px var(--bg)}
+.hero{height:410px;display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:8px;text-shadow:0 0 16px var(--bg),0 0 5px var(--bg)}
 .hero h1{font:400 46px/1 "Pinyon Script",cursive;margin:0;color:var(--rose)}.hero i{font-style:normal;font-size:13px;letter-spacing:.03em}
 .card{background:var(--card);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border:1px solid var(--ln);border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 6px 22px rgba(41,39,40,.06)}
 .ct{font:600 16px Jost,sans-serif;color:var(--rose);margin-bottom:4px}
@@ -17,7 +17,7 @@ main{position:relative;z-index:1;max-width:520px;margin:0 auto;padding:0 16px 11
 .row{display:flex;justify-content:space-between;align-items:center;gap:8px}
 .item{padding:9px 0;border-top:1px solid var(--ln)}.item:first-of-type{border:0}
 input,select,textarea{width:100%;padding:11px 12px;border:1px solid var(--ln);border-radius:14px;background:rgba(255,255,255,.9);color:var(--ink);font:400 16px Jost,sans-serif}
-.f{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}.w{grid-column:1/3}
+.f{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;margin-top:8px}.f>*{min-width:0}input[type=date],input[type=time]{display:block;min-width:0;max-width:100%;min-height:46px;-webkit-appearance:none;appearance:none}.w{grid-column:1/3}
 button{font-family:inherit}
 .go{width:100%;margin-top:10px;padding:13px;border:0;border-radius:999px;background:var(--rose);color:var(--bg);font:600 15px Jost,sans-serif;letter-spacing:.05em}
 .chip{padding:8px 14px;margin:3px 3px 0 0;border:1px solid var(--ln);border-radius:999px;background:rgba(255,255,255,.9);color:var(--ink);font:500 14px Jost,sans-serif}.chip.on{background:var(--rose);border-color:var(--rose);color:var(--bg)}
@@ -34,7 +34,7 @@ nav button{flex:1;border:0;background:none;color:var(--mu);font:500 10.5px Jost,
 <script>
 const sv=p=>`<svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
 const TABS={home:[sv('<polygon points="12,2.5 14.8,9 21.5,9.5 16.3,14 18,21 12,17.3 6,21 7.7,14 2.5,9.5 9.2,9" fill="currentColor"/>'),'Home'],faith:[sv('<path d="M3 5c3-1.6 6-1.6 9 0 3-1.6 6-1.6 9 0v14c-3-1.6-6-1.6-9 0-3-1.6-6-1.6-9 0zM12 5v14"/>'),'Faith'],baby:[sv('<path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/>'),'Weaning'],move:[sv('<path d="M6 6v12M3 9v6M18 6v12M21 9v6M6 12h12"/>'),'Fitness'],meals:[sv('<path d="M6 3v7a2 2 0 0 0 4 0V3M8 3v18M17 3c-2.2 1.2-3 4-3 7h3v11"/>'),'Food'],spend:[sv('<circle cx="12" cy="12" r="9"/><path d="M14.6 9.2c-.5-1-1.5-1.6-2.7-1.6-1.5 0-2.5.8-2.5 2s1 1.7 2.7 2.1c1.7.4 2.7.9 2.7 2.1s-1 2-2.7 2c-1.3 0-2.4-.6-2.8-1.7M12 5.5v13"/>'),'Spending']};
-const TABIMG={home:'hero-home.jpg',faith:'hero-faith.jpg',baby:'hero-baby.jpg',move:'hero-fit.jpg',meals:'hero-food.jpg',spend:'hero-spend.jpg'};
+const TABIMG={home:['hero-home.jpg','1000/777'],faith:['hero-faith.jpg','858/1000'],baby:['hero-baby.jpg','1000/809'],move:['hero-fit.jpg','1000/992'],meals:['hero-food.jpg','806/1000'],spend:['hero-spend.jpg','1000/858']};
 const ORN='<svg class="orn" viewBox="0 0 170 16"><path d="M5 8C35 0 55 16 85 8S135 0 165 8" fill="none" stroke="#b48a45" stroke-width="1.4"/><ellipse cx="85" cy="8" rx="6" ry="3.5" fill="#c7808c"/><ellipse cx="60" cy="9" rx="7" ry="2.6" fill="#8aa386" transform="rotate(-20 60 9)"/><ellipse cx="110" cy="7" rx="7" ry="2.6" fill="#8aa386" transform="rotate(20 110 7)"/></svg>';
 const iso=d=>{const z=new Date(d);return z.getFullYear()+'-'+String(z.getMonth()+1).padStart(2,'0')+'-'+String(z.getDate()).padStart(2,'0')};
 const today=iso(new Date()),$=i=>document.getElementById(i),uid=()=>Math.random().toString(36).slice(2);
@@ -152,7 +152,7 @@ function home(){const F=S.faith[today]||{},[a,b]=weekRange(),wm=new Set(S.move.f
  return page('Good day, Meishe',`Day ${n} of ${LEN} · ${new Date().toDateString()}`)+
  lk('faith',Math.round(dayPct(F)*100)+'% of today’s habits','Goal 80% · tap to check off')+lk('baby',nm+' min nursed · '+ts.toFixed(1)+' tbsp eaten',B.length?B.length+' entries today':'Nothing logged yet today')+lk('move',wm+' active day'+(wm===1?'':'s')+' this week','Goal 5 days')+lk('meals',sum(S.meals,x=>x.x)+' meals in the journal','Tap to add a dish')+lk('spend',weekLeft(),'Shared household budget')+
  card('Last 7 days',`<div class="wk" style="margin-top:8px"><span></span>${D.map(d=>`<span class="mu" style="text-align:center">${dl(d)}</span>`).join('')}${row('Faith',d=>S.faith[d]?dayPct(S.faith[d])>=.8:null)}${row('Fitness',d=>S.move.some(x=>x.d===d)?true:null)}${row('Peter',d=>S.baby.some(x=>x.d===d)?true:null)}${row('Spending',d=>S.spend.some(x=>x.d===d)?sum(S.spend.filter(x=>x.d===d),x=>x.a)<=S.budget/7:null)}</div>`)+cloud()}
-function render(){const y=scrollY;$('app').innerHTML={home,faith,move,meals,spend,baby}[S.tab]();$('bg').style.backgroundImage='url('+TABIMG[S.tab]+')';$('nav').innerHTML=Object.entries(TABS).map(([k,v])=>`<button class="${S.tab===k?'on':''}" onclick="S.tab='${k}';render();scrollTo(0,0)"><b>${v[0]}</b>${v[1]}</button>`).join('');scrollTo(0,y)}
+function render(){const y=scrollY;$('app').innerHTML={home,faith,move,meals,spend,baby}[S.tab]();{const I=TABIMG[S.tab],bg=$('bg'),hr=document.querySelector('.hero');bg.style.backgroundImage='url('+I[0]+')';bg.style.aspectRatio=I[1];if(hr)hr.style.height=Math.max(150,.9*bg.offsetHeight-(hr.getBoundingClientRect().top+scrollY))+'px'}$('nav').innerHTML=Object.entries(TABS).map(([k,v])=>`<button class="${S.tab===k?'on':''}" onclick="S.tab='${k}';render();scrollTo(0,0)"><b>${v[0]}</b>${v[1]}</button>`).join('');scrollTo(0,y)}
 render();if(AU)sync();
 document.addEventListener('visibilitychange',()=>{if(AU&&!document.hidden)sync()});
 try{if('serviceWorker' in navigator&&location.protocol.startsWith('http'))navigator.serviceWorker.register('sw.js')}catch(e){}
