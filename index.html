@@ -59,17 +59,29 @@ const page=(t,q)=>`<div class="hero"><h1>${t}</h1><i>${q}</i></div>`;
 const card=(t,b)=>`<div class="card"><div class="ct">${t}</div>${b}</div>`;
 const opts=(a,v)=>a.map(x=>`<option ${x==v?'selected':''}>${x}</option>`).join('');
 /* FAITH */
-const H=[['rise','Arise 6:00 AM','c'],['ret','Retire 10:00 PM','c'],['plan','Daily planning','c'],['jrn','Journaling','c'],['pers','Personal scripture','m',30],['comp','Companion study','m',30],['fs','Family scripture','c'],['fp','Family prayer','c'],['lang','Language study','m',1],['art','Painting','m',1],['up','Uplifting media','m',1]];
-const hd=(e,h)=>h[2]==='c'?!!e[h[0]]:(+e[h[0]]||0)>=h[3],dayPct=e=>H.filter(h=>hd(e||{},h)).length/H.length;
+const H=[['rise','Arise 6:30 AM','w'],['ret','Retire 10:30 PM','c'],['plan','Daily planning','c'],['jrn','Journaling','c'],['pers','Personal scripture','m',30],['comp','Companion study','c'],['fs','Family scripture','c'],['fp','Family prayer','c'],['skill','Skills','s',30]];
+const CORE=['rise','fs','fp'],wt=h=>CORE.includes(h[0])?2:1,WTOT=H.reduce((s,h)=>s+wt(h),0),W0=390;
+const WM=e=>{const m=/^(\d{1,2}):(\d{2})$/.exec((e&&e.wk)||'');return m?(+m[1])*60+(+m[2]):null};
+const wakeFrac=e=>{e=e||{};const w=WM(e);return w==null?(e.rise?1:0):w>=W0+90?0:w<=W0?1:(W0+90-w)/90};
+const wakeBonus=e=>{const w=WM(e);return w==null||w>=W0?0:Math.min(1,(W0-w)/60)};
+const MD_PER_MIN=1/60,MD_CAP=3;
+const mdPts=e=>{e=e||{};const n=((+e.up||0)-(+e.dis||0))*MD_PER_MIN;return n>0?Math.min(n,MD_CAP):n};
+const mnu=(e,h)=>h[2]==='s'?(+e.lang||0)+(+e.art||0):(+e[h[0]]||0);
+const hd=(e,h)=>h[2]==='w'?wakeFrac(e)>=1:h[2]==='c'?!!e[h[0]]:mnu(e,h)>=h[3];
+/* study/skills: partial credit up to 30 min, then up to +0.5 pt extra by 60 min */
+const hp=(e,h)=>h[2]==='w'?wt(h)*wakeFrac(e):h[2]==='c'?(hd(e,h)?wt(h):0):wt(h)*Math.min(mnu(e,h)/h[3],1)+.5*Math.min(Math.max(mnu(e,h)-h[3],0)/30,1);
+const pts=e=>{e=e||{};return H.reduce((s,h)=>s+hp(e,h),0)+wakeBonus(e)+mdPts(e)};
+const dayPct=e=>Math.max(0,Math.min(1,pts(e)/WTOT));
 function setF(f,v){const e=(S.faith[S.fd]=S.faith[S.fd]||{});e[f]=v===''?undefined:v;save();render()}
 function faith(){const F=S.faith,e=F[S.fd]||{},el=Math.min(LEN,Math.max(1,dd(today,ST)+1)),keys=Object.keys(F).filter(d=>d>=ST);
  const tot=sum(keys,d=>dayPct(F[d])),hit=keys.filter(d=>dayPct(F[d])>=.8).length;
  const wk=Array.from({length:8},(_,i)=>{const ds=Array.from({length:7},(_,j)=>add(ST,i*7+j)).filter(d=>d<=today&&d<=add(ST,LEN-1));return ds.length?sum(ds,d=>dayPct(F[d]))/ds.length:0});
  const chips=H.filter(h=>h[2]==='c').map(h=>`<button class="chip ${e[h[0]]?'on':''}" onclick="setF('${h[0]}',${!e[h[0]]})">${h[1]}</button>`).join('');
- const mins=[['pers','Personal scripture (min)'],['comp','Companion study (min)'],['lang','Language (min)'],['art','Painting (min)'],['up','Uplifting media (min)'],['dis','Distracting media (min)']].map(([f,l])=>`<div><div class="mu">${l}</div><input type="number" inputmode="decimal" value="${e[f]==null?'':e[f]}" onchange="setF('${f}',this.value===''?'':+this.value)"></div>`).join('');
+ const cell=(f,l)=>`<div><div class="mu">${l}</div><input type="number" inputmode="decimal" value="${e[f]==null?'':e[f]}" onchange="setF('${f}',this.value===''?'':+this.value)"></div>`;
+ const mins=`<div><div class="mu">Arise</div><input type="time" value="${esc(e.wk)}" onchange="setF('wk',this.value)"></div>`+cell('pers','Personal scripture (min)')+cell('lang','Language (min)')+cell('art','Painting (min)')+cell('dis','Distracting media (min)')+cell('up','Uplifting media (min)');
  const bar=H.map(h=>{const l=keys.filter(d=>hd(F[d],h)).length;return`<div class="item"><div class="row"><span>${h[1]}</span><span class="mu">${l}/${el}</span></div><div class="bar"><i style="width:${l/el*100}%"></i></div></div>`}).join('');
  return page('Faith &amp; Discipline','“Arise early, that your bodies and your minds may be invigorated.” D&amp;C 88:124')+
- card('Adherence',`<div class="row"><div><div class="big">${(tot/el*100).toFixed(0)}%</div><div class="mu">of ${el} days so far</div></div><div style="text-align:right"><div class="big">${hit}</div><div class="mu">days at 80% or more</div></div></div><div class="mu" style="margin-top:6px">Scripture ${((sum(keys,d=>F[d].pers)+sum(keys,d=>F[d].comp))/60).toFixed(1)}h · Uplifting ${(sum(keys,d=>F[d].up)/60).toFixed(1)}h · Distracting ${(sum(keys,d=>F[d].dis)/60).toFixed(1)}h</div>`)+
+ card('Adherence',`<div class="row"><div><div class="big">${(tot/el*100).toFixed(0)}%</div><div class="mu">of ${el} days so far</div></div><div style="text-align:right"><div class="big">${hit}</div><div class="mu">days at 80% or more</div></div></div><div class="mu" style="margin-top:6px">Scripture ${((sum(keys,d=>F[d].pers)+sum(keys,d=>typeof F[d].comp==='number'?F[d].comp:0))/60).toFixed(1)}h · Skills ${((sum(keys,d=>F[d].lang)+sum(keys,d=>F[d].art))/60).toFixed(1)}h · Uplifting ${(sum(keys,d=>F[d].up)/60).toFixed(1)}h · Distracting ${(sum(keys,d=>F[d].dis)/60).toFixed(1)}h</div>`)+
  card('Weekly adherence',bars(wk,wk.map((_,i)=>'Wk'+(i+1)),1,.8)+'<div class="mu">Dashed line is the 80% goal. Oct 11 – Nov 27.</div>')+
  card('Today’s habits',`<input type="date" value="${S.fd}" onchange="S.fd=this.value;render()"><div class="mu" style="margin-top:8px">${Math.round(dayPct(e)*100)}% of the day</div><div class="bar"><i style="width:${dayPct(e)*100}%"></i></div>${chips}<div class="f">${mins}</div><input class="w" style="margin-top:8px" placeholder="Media topics / notes" value="${esc(e.n)}" onchange="setF('n',this.value)">`)+card('Habit by habit',bar)}
 /* MOVE */
