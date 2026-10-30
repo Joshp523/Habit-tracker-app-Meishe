@@ -31,11 +31,15 @@ Also: cloud sync with the household database and offline use.
     <td><img src="hero-spend.jpg" alt="Spending"><br><sub>Spending</sub></td>
     <td></td>
   </tr>
+  <tr>
+    <td><img src="hero-home.jpg" alt="Spending"><br><sub>Spending</sub></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><img src="hero-wish.jpg" alt="Spending"><br><sub>Spending</sub></td>
+    <td></td>
+  </tr>
 </table>
-<p align="center">
-  <img src="hero-home.jpg" alt="Home" width="49%">
-  <img src="hero-wish.jpg" alt="Wish List" width="49%">
-</p>
 
 ## Stack
 
