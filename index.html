@@ -27,7 +27,7 @@ button{font-family:inherit}
 .kg{width:76px;display:inline-block;padding:6px}
 .al{display:inline-block;margin:3px;padding:4px 11px;border-radius:999px;border:1px dashed var(--ln);color:var(--mu);font-size:14px}.al.on{border:1px solid var(--sage);background:var(--sage2);color:var(--ink)}
 .wk{display:grid;grid-template-columns:62px repeat(7,1fr);gap:6px;align-items:center}.dt{display:block;height:14px;border-radius:7px;background:var(--ln)}.dt.ok{background:var(--rose)}.dt.bad{background:var(--bad)}
-nav{position:fixed;left:0;right:0;bottom:0;display:flex;background:rgba(241,241,236,.95);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-top:1px solid var(--ln);padding:4px 2px calc(6px + env(safe-area-inset-bottom,0px));z-index:5}
+nav{position:fixed;left:0;right:0;bottom:0;display:flex;background:rgba(241,241,236,.95);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-top:1px solid var(--ln);padding:4px 2px max(8px,calc(env(safe-area-inset-bottom,0px) - 10px));z-index:5}
 nav button{flex:1;border:0;background:none;color:var(--mu);font:500 10.5px Jost,sans-serif;padding:6px 0 2px;letter-spacing:.03em}nav button b{display:block;height:24px}nav svg{display:block;margin:0 auto}nav .on{color:var(--rose);font-weight:600}
 .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom,0px));background:var(--rose);color:var(--bg);padding:9px 18px;border-radius:999px;opacity:0;transition:opacity .25s;pointer-events:none;z-index:9}
 .wl{text-decoration:none;display:inline-block;background:var(--rose);border-color:var(--rose);color:var(--bg);margin:0 2px}
@@ -196,6 +196,7 @@ function wishIn(d){const j=d.wishJ||[];if(JSON.stringify(j)!==JSON.stringify(S.w
 function wish(){return page('Wish List','what we would each love')+`<div class="mu" style="margin:0 4px 12px">Edit your own list. His is view-only: tick an item when you buy it and it disappears from your view (he won't see that).</div>`+wishCards(card,'Meishe','Josh')}
 function render(){const y=scrollY;$('app').innerHTML={home,faith,move,meals,spend,baby,wish}[S.tab]();{const I=TABIMG[S.tab],bg=$('bg'),hr=document.querySelector('.hero');bg.style.backgroundImage='url('+I[0]+')';bg.style.aspectRatio=I[1];if(hr)hr.style.height=Math.max(150,.9*bg.offsetHeight-(hr.getBoundingClientRect().top+scrollY))+'px'}$('nav').innerHTML=Object.entries(TABS).map(([k,v])=>`<button class="${S.tab===k?'on':''}" onclick="S.tab='${k}';render();scrollTo(0,0)"><b>${v[0]}</b>${v[1]}</button>`).join('');scrollTo(0,y)}
 render();if(AU)sync();
+document.addEventListener('focusout',()=>setTimeout(()=>{if(!/INPUT|TEXTAREA|SELECT/.test((document.activeElement||{}).tagName||'')){const y=scrollY;scrollTo(0,y+1);scrollTo(0,y)}},150));
 document.addEventListener('visibilitychange',()=>{if(AU&&!document.hidden)sync()});
 try{if('serviceWorker' in navigator&&location.protocol.startsWith('http'))navigator.serviceWorker.register('sw.js')}catch(e){}
 </script></body></html>
