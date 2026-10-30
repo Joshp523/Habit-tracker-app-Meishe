@@ -2,11 +2,6 @@
 
 A warm, quiet family journal for faith, movement, meals, weaning and spending. It's an installable phone app with a soft garden palette.
 
-<p align="center">
-  <img src="hero-home.jpg" alt="Home" width="49%">
-  <img src="hero-wish.jpg" alt="Wish List" width="49%">
-</p>
-
 ## Features
 
 | Page | What it does |
@@ -37,6 +32,10 @@ Also: cloud sync with the household database and offline use.
     <td></td>
   </tr>
 </table>
+<p align="center">
+  <img src="hero-home.jpg" alt="Home" width="49%">
+  <img src="hero-wish.jpg" alt="Wish List" width="49%">
+</p>
 
 ## Stack
 
