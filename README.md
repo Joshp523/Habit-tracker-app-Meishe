@@ -1,4 +1,4 @@
-# Meishe's Garden Book
+# Meishe's Habit Tracker
 
 A warm, quiet family journal for faith, movement, meals, weaning and spending. It's an installable phone app with a soft garden palette.
 
