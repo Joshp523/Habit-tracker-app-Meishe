@@ -29,14 +29,10 @@ Also: cloud sync with the household database and offline use.
   </tr>
   <tr>
     <td><img src="hero-spend.jpg" alt="Spending"><br><sub>Spending</sub></td>
-    <td></td>
+    <td><img src="hero-wish.jpg" alt="Spending"><br><sub>Spending</sub></td>
   </tr>
   <tr>
     <td><img src="hero-home.jpg" alt="Spending"><br><sub>Spending</sub></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td><img src="hero-wish.jpg" alt="Spending"><br><sub>Spending</sub></td>
     <td></td>
   </tr>
 </table>
