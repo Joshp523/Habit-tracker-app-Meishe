@@ -1,69 +1,37 @@
-# Meishe's Habit Tracker
+<p align="center"><img src="icon-192.png" width="110" alt=""></p>
 
-A warm, quiet family journal for faith, movement, meals, weaning and spending. It's an installable phone app with a soft garden palette.
+<h1 align="center">Habits: Meishe (Garden Book)</h1>
+<p align="center"><em>A warm, quiet journal for faith, family, meals and more.</em></p>
+<p align="center"><a href="https://joshp523.github.io/Habit-tracker-app-Meishe/"><b>▶ Open the app</b></a></p>
 
-## Features
+<p align="center"><img src="readme-showcase.jpg" alt="Habits: Meishe (Garden Book) on a phone"></p>
 
-| Page | What it does |
-|---|---|
-| **Home** | Today's habits at a glance, weekly streak, and **How Josh is doing**, a small read-only summary of his day |
-| **Faith** | Daily habit checklist with weekly adherence and a habit-by-habit view |
-| **Weaning** | Peter's weaning journal: foods tried, allergen introductions and variety over two weeks |
-| **Fitness** | Log a move, see the week, celebrate every step |
-| **Food** | Belgian meal journal and a recipe box of family favorites |
-| **Spending** | Weekly budget and category caps (Unavoidable, Optional, Frivolous) |
-| **Wishes** | Shared wish lists: edit your own, view his, and tick what you bought so it vanishes from your view only |
+Meishe's Garden Book is a gentle habit journal in a soft garden palette, with its own pages for faith, the baby's first foods, movement, Belgian meals and the household budget.
 
-Also: cloud sync with the household database and offline use.
+## The pages
 
-## Gallery
+- **Home:** today's habits at a glance, the weekly streak, and *How Josh is doing*, a peek at his day.
+- **Faith:** a daily habit checklist with weekly progress.
+- **Weaning:** Peter's first-foods journal: what he's tried, allergens introduced, and variety over two weeks.
+- **Fitness:** log a move and celebrate every step.
+- **Food:** a Belgian meal journal and a box of family favorites.
+- **Spending:** a weekly budget, split into Unavoidable, Optional and Frivolous.
+- **Wishes:** shared wish lists with Josh.
 
-<table>
-  <tr>
-    <td><img src="hero-faith.jpg" alt="Faith"><br><sub>Faith</sub></td>
-    <td><img src="hero-baby.jpg" alt="Weaning"><br><sub>Weaning</sub></td>
-  </tr>
-  <tr>
-    <td><img src="hero-fit.jpg" alt="Fitness"><br><sub>Fitness</sub></td>
-    <td><img src="hero-food.jpg" alt="Food"><br><sub>Food</sub></td>
-  </tr>
-  <tr>
-    <td><img src="hero-spend.jpg" alt="Spending"><br><sub>Spending</sub></td>
-    <td><img src="hero-wish.jpg" alt="Wish List"><br><sub>Wish List</sub></td>
-  </tr>
-  <tr>
-    <td><img src="hero-home.jpg" alt="Home"><br><sub>Home</sub></td>
-    <td></td>
-  </tr>
-</table>
+<table><tr><td align="center" valign="top"><img src="readme-screen-1.jpg" width="230" alt="Home"><br><sub>Home</sub></td><td align="center" valign="top"><img src="readme-screen-3.jpg" width="230" alt="Weaning journal"><br><sub>Weaning journal</sub></td><td align="center" valign="top"><img src="readme-screen-4.jpg" width="230" alt="Belgian meal journal"><br><sub>Belgian meal journal</sub></td></tr></table>
+## Why it's worth a look
 
-## Stack
+- **Cool:** It's beautiful: painted backdrops and script lettering make checking in feel calm, not like a chore.
+- **Innovative:** Two people, two very different apps, one shared household. Meishe and Josh each see a little of the other's day.
+- **Impressive:** A baby weaning tracker, meal journal, budget and wish list in one, made for one person's real life.
+- **Useful:** Everything a busy young mother wants to keep track of, on the phone she already has in her hand.
 
-- **Front end:** a single `index.html` of vanilla HTML, CSS and JavaScript. No framework and no build step.
-- **PWA:** service worker (`sw.js`) and web manifest for home-screen install and offline use.
-- **Storage:** `localStorage` on the device, synced to **Supabase** (Auth plus a shared JSON snapshot row). Her data lives under its own key so the two apps never overwrite each other.
-- **Fonts:** Jost and Pinyon Script from Google Fonts.
+---
 
-## Files
+### On your phone
+Open the link in Safari (iPhone/iPad) or Chrome (Android), then choose **Share → Add to Home Screen**. It gets its own icon and opens full-screen, just like an app from the store.
 
-```
-index.html               the whole app
-sw.js                    offline cache
-manifest.webmanifest     install metadata
-hero-*.jpg               page background images
-```
+### More apps by Josh Riley
+[The Riley Rag](https://joshp523.github.io/RileyRag/) · [QuipRash](https://joshp523.github.io/Quip-game-app/) · [Word Games](https://joshp523.github.io/Word-Games/) · [Russian Verbs](https://joshp523.github.io/russian/) · [Riley Rangers](https://joshp523.github.io/Rangers-app/) · [Habits: Josh](https://joshp523.github.io/daily-discipline/) · [Habits: Grandma](https://joshp523.github.io/wendys-app/) · [Writing](https://joshp523.github.io/writing-app/)
 
-## Run it
-
-1. Serve the folder over HTTPS (GitHub Pages works) and open `index.html`.
-2. On iPhone: Safari, Share, **Add to Home Screen**.
-3. Sign in from the **Cloud backup** card to sync with the household database.
-
-## Security notes
-
-- The publishable key in `index.html` is meant to be public. Access is controlled by Supabase row-level security, so never commit service keys.
-- Both apps share one database row and one login, so "edit only your own list" is enforced by the apps themselves, not by the database.
-
-## Credits
-
-Background images are used for personal, non-commercial purposes. Replace them with your own if you publish this.
+<sub>Built by Josh Riley. Setup notes for whoever maintains it are in [SETUP.md](SETUP.md).</sub>
